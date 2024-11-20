@@ -160,25 +160,56 @@ public class Group_MidLabAct3_Problem1 {
                 System.out.println("Invalid Choice!");
         }
     }
-    
+
+    // recursive function
    static void merge(int[] array, int start, int end, int[] og_array) {
-       // recursive function
+        /* under the if-statement, the program will check if the starting index is less than
+         the ending index, it means the array has more than one element and is in need for
+         further division*/
        if (start < end) {
+           // the formula for int mid is to find the midpoint to divide the array into two halves.
            int mid = (start + end) / 2;
-   
-           merge(array, start, mid, og_array);
-   
-           merge(array, mid + 1, end, og_array);
-   
+
+           /* this call handles the left half of the array, recursively divides the array
+           from index 'start' to 'mid' until it cannot be divided any longer (array contains only one
+           element or is empty). This ensures that the left array is completely processed before
+           moving to the right array.*/
+           merge(array, start, mid, og_array); // recursive call
+
+           /* while this call handles the right half of the array, recursively divides the array
+           from index 'mid + 1' to 'end' until it cannot be divided any longer (array contains only one
+           element or is empty). This ensures that the right portion is completely processed before the 
+           merging begins.*/
+           merge(array, mid + 1, end, og_array); // recursive call
+
+            /* NOTE: RECURSIVE CALLS ARE CRUCIAL TO FURTHER DIVIDE THE ARRAY UNTIL THE BASE
+            CASE IS REACHED OR IS NOT DIVIDABLE ANY FURTHER. */
+           
+           /* the formula for int sub1 is used to calculate the size of the left subarray from
+           the 'start' to 'mid'.*/
            int sub1 = mid - start + 1;
+           /* as for int sub2, it is used to calculate the size of the right subarray from
+           the 'mid' to 'end'. */
            int sub2 = end - mid;
-   
+
+           /* the int[] arr_L creates a temporary array to store or hold the elements
+           of the left array.*/
            int[] arr_L = new int[sub1];
+           /* while the int[] arr_R creates a temporary array to store or hold the elements
+           of the right array. */
            int[] arr_R = new int[sub2];
-   
+
+            /* NOTE: TEMPORARY ARRAYS ARE CREATED TO HOLD THE ELEMENTS OF THE LEFT AND RIGHT
+            SUBARRAYS FOR MERGING PURPOSES.*/
+           
+           /* this for loop is used to copy the elements from the main array inputted by the user
+           into the left subarray (arr_L) starting from the 'start' index.*/
            for (int i = 0; i < sub1; i++) {
                arr_L[i] = array[start + i];
            }
+
+           /* while this section of the for loop is used to copy the elements from the main array inputted by the user
+           into the right subarray (arr_R) starting from the 'mid + 1' index. */
            for (int i = 0; i < sub2; i++) {
                arr_R[i] = array[mid + 1 + i];
            }
